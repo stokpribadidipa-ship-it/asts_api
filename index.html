@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Users - Ujian ASTS</title>
+
+<!-- Bootstrap 5, Google Fonts & Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --brand-dark: #0288D1;
+    --brand-primary: #03A9F4;
+    --brand-light: #E0F7FA;
+    --brand-gradient: linear-gradient(135deg, #0288D1 0%, #26C6DA 100%);
+    --bg-page: #F4F8FA;
+    --card-shadow: 0 10px 30px rgba(2, 136, 209, 0.08);
+  }
+
+  body {
+    background-color: var(--bg-page);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #334155;
+  }
+
+  /* Navbar Styles */
+  .navbar-custom {
+    background: var(--brand-gradient);
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(2, 136, 209, 0.2);
+  }
+
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* Main Card Styles */
+  .card-main {
+    border: none;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .card-header-custom {
+    background: #ffffff;
+    border-bottom: 1px solid #F1F5F9;
+    padding: 1.5rem 1.75rem;
+  }
+
+  /* Table Customization */
+  .table-responsive {
+    border-radius: 12px;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+
+  .table thead th {
+    background: #F8FAFC;
+    color: #475569;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .table tbody tr {
+    transition: all 0.2s ease;
+  }
+
+  .table tbody tr:hover {
+    background-color: #F0F9FF !important;
+  }
+
+  .table tbody td {
+    padding: 1rem 1.25rem;
+    color: #334155;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #F1F5F9;
+  }
+
+  /* Avatars & Badges */
+  .avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--brand-gradient);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(3, 169, 244, 0.25);
+    flex-shrink: 0;
+  }
+
+  .badge-gender {
+    padding: 0.4em 0.8em;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-male {
+    background: #E0F2FE;
+    color: #0369A1;
+  }
+  .badge-female {
+    background: #FCE7F3;
+    color: #BE185D;
+  }
+
+  /* Form & Inputs */
+  .search-box .input-group-text {
+    border-radius: 12px 0 0 12px;
+    border-color: #E2E8F0;
+    background: #F8FAFC;
+  }
+
+  .search-box .form-control {
+    border-radius: 0 12px 12px 0;
+    border-color: #E2E8F0;
+    font-size: 0.9rem;
+  }
+
+  .form-control, .form-select {
+    border-radius: 10px;
+    border: 1.5px solid #E2E8F0;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .form-control:focus, .form-select:focus {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 4px rgba(3, 169, 244, 0.15);
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 0.85rem;
+  }
+
+  /* Buttons */
+  .btn {
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.55rem 1.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-gradient {
+    background: var(--brand-gradient);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(2, 136, 209, 0.25);
+  }
+  .btn-gradient:hover {
+    color: #fff;
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(2, 136, 209, 0.35);
+  }
+
+  .btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  /* Modals */
+  .modal-content {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+
+  .modal-header {
+    background: var(--brand-gradient);
+    color: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 1.25rem 1.5rem;
+  }
+
+  /* Pagination */
+  .pagination {
+    gap: 4px;
+  }
+  .pagination .page-link {
+    border-radius: 8px !important;
+    border: 1px solid #E2E8F0;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+  .pagination .page-item.active .page-link {
+    background: var(--brand-gradient);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(2, 136, 209, 0.3);
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: #94A3B8;
+  }
+  .empty-state i {
+    font-size: 3.5rem;
+    color: #CBD5E1;
+  }
+
+  footer {
+    color: #64748B;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark navbar-custom mb-4">
+  <div class="container">
+    <span class="navbar-brand mb-0 d-flex align-items-center">
+      <i class="bi bi-person-badge-fill fs-4 me-2"></i>Data Users &mdash; Ujian ASTS
+    </span>
+  </div>
+</nav>
+
+<div class="container pb-5">
+
+  <div class="card card-main">
+    <div class="card-header-custom d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <div class="d-flex align-items-center">
+        <h5 class="mb-0 fw-bold text-dark me-2"><i class="bi bi-people me-2 text-primary"></i>Daftar Users</h5>
+        <span class="badge bg-light text-primary border rounded-pill px-3 py-2" id="badgeTotal">0 data</span>
+      </div>
+      <button class="btn btn-gradient d-flex align-items-center gap-1" onclick="bukaTambah()">
+        <i class="bi bi-plus-lg fs-6"></i> Tambah Data
+      </button>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div class="input-group search-box" style="max-width: 340px;">
+          <span class="input-group-text text-muted">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="text" id="searchInput" class="form-control"
+                 placeholder="Cari nama, email, atau NISN..." oninput="filterTabel()">
+        </div>
+        <button class="btn btn-outline-secondary btn-sm rounded-3 d-flex align-items-center gap-1" onclick="muatData()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th class="text-center" width="60">NO</th>
+              <th>PENGGUNA</th>
+              <th>NISN</th>
+              <th>TTL</th>
+              <th class="text-center">GENDER</th>
+              <th>EMAIL</th>
+              <th>ALAMAT</th>
+              <th class="text-center" width="120">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="hasil">
+            <tr>
+              <td colspan="8" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <div class="mt-2 text-muted small">Memuat data...</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-2">
+        <div class="text-muted small fw-medium" id="infoPagination">Menampilkan 0 data</div>
+        <nav>
+          <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center mt-4">
+    <i class="bi bi-mortarboard-fill me-1"></i> Ujian Praktik ASTS Ganjil &middot; ujian_astspfaqih
+  </footer>
+</div>
+
+<!-- Modal Tambah / Edit -->
+<div class="modal fade" id="modalForm" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="modalTitle">
+          <i class="bi bi-person-plus-fill me-2"></i>Tambah Data
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <input type="hidden" id="f_id">
+
+        <div class="mb-3">
+          <label class="form-label"><i class="bi bi-person me-1 text-primary"></i>Nama Lengkap</label>
+          <input type="text" id="f_name" class="form-control" placeholder="Masukkan nama lengkap">
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label"><i class="bi bi-card-text me-1 text-primary"></i>NISN</label>
+            <input type="text" id="f_nisn" class="form-control" placeholder="10 digit angka"
+                   inputmode="numeric" maxlength="10"
+                   oninput="validasiNisnInput(this)">
+            <div id="nisnWarning" class="form-text fs-7 text-muted">
+              Harus persis 10 digit angka.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label"><i class="bi bi-gender-ambiguous me-1 text-primary"></i>Gender</label>
+            <select id="f_gender" class="form-select">
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label"><i class="bi bi-calendar-event me-1 text-primary"></i>TTL</label>
+          <input type="text" id="f_ttl" class="form-control" placeholder="Contoh: PONOROGO, 12 Agustus 2010">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label"><i class="bi bi-envelope me-1 text-primary"></i>Email</label>
+          <input type="email" id="f_email" class="form-control" placeholder="nama@email.com">
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label"><i class="bi bi-geo-alt me-1 text-primary"></i>Alamat</label>
+          <textarea id="f_address" class="form-control" rows="3" placeholder="Alamat lengkap"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer bg-light px-4 py-3">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+        <button class="btn btn-gradient px-4" onclick="simpanData()">
+          <i class="bi bi-save me-1"></i>Simpan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="modalHapus" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center p-4">
+        <i class="bi bi-exclamation-circle text-danger display-4 mb-3 d-inline-block"></i>
+        <h5 class="fw-bold mb-2">Hapus Data?</h5>
+        <p class="text-muted small mb-4">Apakah Anda yakin ingin menghapus <strong id="namaHapus"></strong>?</p>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-light w-50" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-danger w-50" onclick="konfirmasiHapus()">Hapus</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifikasi -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="toastNotif" class="toast align-items-center border-0 text-white bg-dark rounded-3" role="alert">
+    <div class="d-flex">
+      <div class="toast-body" id="toastPesan">
+        <i class="bi bi-check-circle-fill me-1"></i>Pesan
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_URL = "http://localhost/ujian_astspfaqih/data_json.php";
+
+let dataUsers = [];
+let filteredUsers = [];
+let idAkanDihapus = null;
+let idTerbaru = null;
+
+// Pagination
+let currentPage = 1;
+const rowsPerPage = 5;
+
+const modalForm  = () => bootstrap.Modal.getOrCreateInstance(document.getElementById("modalForm"));
+const modalHapus = () => bootstrap.Modal.getOrCreateInstance(document.getElementById("modalHapus"));
+const toastNotif = () => bootstrap.Toast.getOrCreateInstance(document.getElementById("toastNotif"));
+
+function escapeHtml(str){
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function tampilkanToast(pesan, sukses = true){
+  const toastEl = document.getElementById("toastNotif");
+  toastEl.className = `toast align-items-center border-0 text-white rounded-3 ${sukses ? 'bg-success' : 'bg-danger'}`;
+  document.getElementById("toastPesan").innerHTML =
+    `<i class="bi ${sukses ? 'bi-check-circle-fill' : 'bi-x-circle-fill'} me-2"></i>${escapeHtml(pesan)}`;
+  toastNotif().show();
+}
+
+function inisial(nama){
+  return (nama || "?").trim().charAt(0).toUpperCase();
+}
+
+function renderTabel(){
+  const total = filteredUsers.length;
+  if (!total){
+    document.getElementById("hasil").innerHTML = `
+      <tr><td colspan="8">
+        <div class="empty-state">
+          <i class="bi bi-inbox"></i>
+          <div class="mt-2 fw-medium">Belum ada data tersedia</div>
+        </div>
+      </td></tr>`;
+    document.getElementById("infoPagination").innerText = "Menampilkan 0 data";
+    document.getElementById("pagination").innerHTML = "";
+    return;
+  }
+
+  const totalPages = Math.ceil(total / rowsPerPage);
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = Math.min(start + rowsPerPage, total);
+  const pageData = filteredUsers.slice(start, end);
+
+  let html = "";
+  pageData.forEach((item, index) => {
+    const isMale = (item.gender || "").toUpperCase() === "MALE";
+    const badgeClass = isMale ? "badge-male" : "badge-female";
+    
+    html += `
+      <tr>
+        <td class="text-center font-monospace text-muted">${start + index + 1}</td>
+        <td>
+          <div class="d-flex align-items-center gap-3">
+            <div class="avatar-circle">${inisial(item.name)}</div>
+            <div class="fw-semibold text-dark">${escapeHtml(item.name)}</div>
+          </div>
+        </td>
+        <td><span class="font-monospace text-secondary">${escapeHtml(item.nisn)}</span></td>
+        <td>${escapeHtml(item.ttl)}</td>
+        <td class="text-center">
+          <span class="badge badge-gender ${badgeClass}">${escapeHtml(item.gender)}</span>
+        </td>
+        <td><a href="mailto:${escapeHtml(item.email)}" class="text-decoration-none text-primary">${escapeHtml(item.email)}</a></td>
+        <td><span class="text-truncate d-inline-block" style="max-width: 180px;">${escapeHtml(item.address)}</span></td>
+        <td class="text-center">
+          <button class="btn btn-action btn-outline-primary me-1" title="Edit" onclick='bukaEdit(${JSON.stringify(item).replace(/'/g, "&#39;")})'>
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-action btn-outline-danger" title="Hapus" onclick="mintaHapus(${item.id}, '${escapeHtml(item.name)}')">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>`;
+  });
+  document.getElementById("hasil").innerHTML = html;
+  document.getElementById("infoPagination").innerText = `Menampilkan ${start + 1} - ${end} dari ${total} data`;
+
+  renderPaginationControls(totalPages);
+}
+
+function renderPaginationControls(totalPages){
+  let paginationHtml = "";
+
+  paginationHtml += `
+    <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+      <button class="page-link" onclick="ubahHalaman(${currentPage - 1})"><i class="bi bi-chevron-left"></i></button>
+    </li>`;
+
+  for (let i = 1; i <= totalPages; i++) {
+    paginationHtml += `
+      <li class="page-item ${i === currentPage ? 'active' : ''}">
+        <button class="page-link" onclick="ubahHalaman(${i})">${i}</button>
+      </li>`;
+  }
+
+  paginationHtml += `
+    <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+      <button class="page-link" onclick="ubahHalaman(${currentPage + 1})"><i class="bi bi-chevron-right"></i></button>
+    </li>`;
+
+  document.getElementById("pagination").innerHTML = paginationHtml;
+}
+
+function ubahHalaman(page){
+  currentPage = page;
+  renderTabel();
+}
+
+function mengurutkanData() {
+  dataUsers.sort((a, b) => {
+    if (a.id == idTerbaru) return -1;
+    if (b.id == idTerbaru) return 1;
+    return b.id - a.id;
+  });
+}
+
+function filterTabel(){
+  const q = document.getElementById("searchInput").value.toLowerCase();
+  filteredUsers = dataUsers.filter(u =>
+    (u.name || "").toLowerCase().includes(q) ||
+    (u.email || "").toLowerCase().includes(q) ||
+    (u.nisn || "").toLowerCase().includes(q)
+  );
+  currentPage = 1;
+  renderTabel();
+  document.getElementById("badgeTotal").innerText = filteredUsers.length + " data";
+}
+
+function muatData(){
+  document.getElementById("hasil").innerHTML = `
+    <tr><td colspan="8" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status"></div>
+      <div class="mt-2 text-muted small">Memuat data...</div>
+    </td></tr>`;
+
+  fetch(API_URL + "?action=list")
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(data => {
+      dataUsers = data;
+      mengurutkanData();
+      filteredUsers = [...dataUsers];
+      currentPage = 1;
+      renderTabel();
+      document.getElementById("badgeTotal").innerText = dataUsers.length + " data";
+    })
+    .catch(err => {
+      document.getElementById("hasil").innerHTML = `
+        <tr><td colspan="8">
+          <div class="empty-state text-danger">
+            <i class="bi bi-wifi-off text-danger"></i>
+            <div class="mt-2 fw-medium">Gagal mengambil data JSON. Pastikan data_json.php &amp; database sudah aktif.</div>
+          </div>
+        </td></tr>`;
+      console.log(err);
+    });
+}
+
+// Mengecek apakah NISN sudah digunakan oleh pengguna lain
+function isNisnDuplikat(nisnInput, currentId = "") {
+  return dataUsers.some(u => String(u.nisn).trim() === String(nisnInput).trim() && String(u.id) !== String(currentId));
+}
+
+function validasiNisnInput(input) {
+  input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+  
+  const warningEl = document.getElementById("nisnWarning");
+  const len = input.value.length;
+  const currentId = document.getElementById("f_id").value;
+
+  if (len === 0) {
+    input.classList.remove("is-invalid", "is-valid");
+    warningEl.className = "form-text fs-7 text-muted";
+    warningEl.innerText = "Harus persis 10 digit angka.";
+  } else if (len < 10) {
+    input.classList.add("is-invalid");
+    input.classList.remove("is-valid");
+    warningEl.className = "form-text fs-7 text-danger fw-semibold";
+    warningEl.innerText = `⚠️ NISN kurang dari 10 digit! (${len}/10)`;
+  } else if (isNisnDuplikat(input.value, currentId)) {
+    input.classList.add("is-invalid");
+    input.classList.remove("is-valid");
+    warningEl.className = "form-text fs-7 text-danger fw-semibold";
+    warningEl.innerText = "⚠️ NISN sudah terdaftar! Gunakan NISN lain.";
+  } else {
+    input.classList.remove("is-invalid");
+    input.classList.add("is-valid");
+    warningEl.className = "form-text fs-7 text-success fw-semibold";
+    warningEl.innerText = "✓ NISN valid dan tersedia.";
+  }
+}
+
+function resetValidasiNisn() {
+  const inputNisn = document.getElementById("f_nisn");
+  const warningEl = document.getElementById("nisnWarning");
+  inputNisn.classList.remove("is-invalid", "is-valid");
+  warningEl.className = "form-text fs-7 text-muted";
+  warningEl.innerText = "Harus persis 10 digit angka.";
+}
+
+function bukaTambah(){
+  document.getElementById("modalTitle").innerHTML = '<i class="bi bi-person-plus-fill me-2"></i>Tambah Data';
+  document.getElementById("f_id").value = "";
+  document.getElementById("f_name").value = "";
+  document.getElementById("f_nisn").value = "";
+  document.getElementById("f_ttl").value = "";
+  document.getElementById("f_gender").value = "MALE";
+  document.getElementById("f_email").value = "";
+  document.getElementById("f_address").value = "";
+  resetValidasiNisn();
+  modalForm().show();
+}
+
+function bukaEdit(item){
+  document.getElementById("modalTitle").innerHTML = '<i class="bi bi-pencil-square me-2"></i>Edit Data';
+  document.getElementById("f_id").value = item.id;
+  document.getElementById("f_name").value = item.name;
+  document.getElementById("f_nisn").value = item.nisn;
+  document.getElementById("f_ttl").value = item.ttl;
+  document.getElementById("f_gender").value = (item.gender || "MALE").toUpperCase();
+  document.getElementById("f_email").value = item.email;
+  document.getElementById("f_address").value = item.address;
+  validasiNisnInput(document.getElementById("f_nisn"));
+  modalForm().show();
+}
+
+function simpanData(){
+  const id = document.getElementById("f_id").value;
+  const isEdit = id !== "";
+  const nama = document.getElementById("f_name").value.trim();
+  const email = document.getElementById("f_email").value.trim();
+  const nisn = document.getElementById("f_nisn").value.trim();
+
+  if (!nama || !email){
+    tampilkanToast("Nama dan Email wajib diisi", false);
+    return;
+  }
+
+  if (nisn.length < 10) {
+    tampilkanToast(`NISN kurang dari 10 digit! (${nisn.length}/10)`, false);
+    document.getElementById("f_nisn").focus();
+    return;
+  }
+
+  if (isNisnDuplikat(nisn, id)) {
+    tampilkanToast("NISN sudah digunakan oleh pengguna lain!", false);
+    document.getElementById("f_nisn").focus();
+    return;
+  }
+
+  const form = new FormData();
+  form.append("action", isEdit ? "update" : "create");
+  if (isEdit) form.append("id", id);
+  form.append("name", nama);
+  form.append("nisn", nisn);
+  form.append("ttl", document.getElementById("f_ttl").value.trim());
+  form.append("gender", document.getElementById("f_gender").value);
+  form.append("email", email);
+  form.append("address", document.getElementById("f_address").value.trim());
+
+  fetch(API_URL, { method: "POST", body: form })
+    .then(res => res.json())
+    .then(res => {
+      if (res.status === "success") {
+        modalForm().hide();
+        idTerbaru = isEdit ? id : res.id;
+        tampilkanToast(res.message || "Data berhasil disimpan", true);
+        muatData();
+      } else {
+        tampilkanToast(res.message || "Gagal menyimpan data", false);
+      }
+    })
+    .catch(() => tampilkanToast("Terjadi kesalahan koneksi", false));
+}
+
+function mintaHapus(id, nama){
+  idAkanDihapus = id;
+  document.getElementById("namaHapus").innerText = nama;
+  modalHapus().show();
+}
+
+function konfirmasiHapus(){
+  const form = new FormData();
+  form.append("action", "delete");
+  form.append("id", idAkanDihapus);
+
+  fetch(API_URL, { method: "POST", body: form })
+    .then(res => res.json())
+    .then(res => {
+      modalHapus().hide();
+      if (res.status === "success") {
+        if (idTerbaru == idAkanDihapus) idTerbaru = null;
+        tampilkanToast(res.message || "Data berhasil dihapus", true);
+        muatData();
+      } else {
+        tampilkanToast(res.message || "Gagal menghapus data", false);
+      }
+    })
+    .catch(() => {
+      modalHapus().hide();
+      tampilkanToast("Terjadi kesalahan koneksi", false);
+    });
+}
+
+muatData();
+</script>
+</body>
+</html>
